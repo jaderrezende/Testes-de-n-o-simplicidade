@@ -2,7 +2,7 @@ def np(N):
     np= {}
     for n in list(factor(N)):
         np[n[0]]=[ 
-            q for q in divisors(N/n[0]) if q%n[0]==1]
+            q for q in divisors(N/n[0]**n[1]) if q%n[0]==1]
     return np
 
 def np_simples(N):
@@ -10,7 +10,7 @@ def np_simples(N):
     for n in list(factor(N)):
         if n[1]==1:
             np[n[0]]=[ 
-                q for q in divisors(N/n[0]) if q%n[0]==1]
+                q for q in divisors(N/n[0]**n[1]) if q%n[0]==1]
         else:
             np[n[0]]=[]
     return np
@@ -30,22 +30,24 @@ def teste(N):
     for p in L:
         for q in L[p][:]:
             if q>5:
-                if factorial(factorial(q)/2*N)<factorial(q)/2:
+                if factorial(factorial(q)/(2*N))<factorial(q)/2:
                     L[p].remove(q)
                     if q in S[p]:
                         S[p].remove(q)
     # Teate 3
-    for p in L:
-        for q in L[p][:]:
-            if P[q]>1:
-                if factorial(N/p**3)<N:
-                    S[p].append(q)
+    for p in L:            
+        if P[p]>1:
+            if factorial(N/p**3)<N:
+                S[p]=L[p]
             
     # Se eliminamos tudo
-    if any([len(L[p]==0 for p in L)]):
+    if any([len(L[p])==0 for p in L]):
         return True
     #Teste de contagem
+    for p in S:
+        if S[p]==[]:
+             del S[p]
     if sum((p**P[p]-1)*min(S[p]) for p in S)+1>N:
         return True
 
-teste(180)
+print(teste(180))
