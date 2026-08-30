@@ -15,39 +15,51 @@ def np_simples(N):
             np[n[0]]=[]
     return np
 
-def teste(N):
-    L=np(N)
-    P=dict(factor(N))
-    S=np_simples(N)
-    #Teste 1
+def teste1(N,L):
     for p in L:
         for q in L[p][:]: # O [:] garante que o for tá trabalhando com uma cópia de L, portanto retiramos elementos sem ter problemas no for
             if factorial(q)/2<N:
                 L[p].remove(q)
-                if q in S[p]:
-                    S[p].remove(q)
-    # Teste 2
+        return L
+    
+def teste2(N,L):
     for p in L:
         for q in L[p][:]:
             if q>5:
                 if factorial(factorial(q)/(2*N))<factorial(q)/2:
                     L[p].remove(q)
-                    if q in S[p]:
-                        S[p].remove(q)
-    # Teate 3
-    for p in L:            
-        if P[p]>1:
+    return L
+    
+def teste3(N,L):
+    P=dict(factor(N))
+    S={}
+    for p in L:
+        if P[p]== 1:
+            S[p]=L[p]
+        else:
             if factorial(N/p**3)<N:
                 S[p]=L[p]
-            
-    # Se eliminamos tudo
-    if any([len(L[p])==0 for p in L]):
-        return True
-    #Teste de contagem
-    for p in S:
-        if S[p]==[]:
-             del S[p]
     if sum((p**P[p]-1)*min(S[p]) for p in S)+1>N:
         return True
 
+    
+    
+def teste(N):
+    L=np(N)
+    L=teste1(N,L)
+    L=teste2(N,L)
+    if any([len(L[p])==0 for p in L]):
+        return True
+    if teste3(N,L):
+        return True
+    
 print(teste(180))
+    
+def find(a,b):
+    L=[]
+    for N in range(a,b):
+        if not teste(N):
+            L.append(N)
+    print(L)
+    
+find(100,180)
