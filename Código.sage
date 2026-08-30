@@ -52,6 +52,7 @@ def teste(N):
         return True
     if teste3(N,L):
         return True
+    return False
     
 print(teste(180))
     
