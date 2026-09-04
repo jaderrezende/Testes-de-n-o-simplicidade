@@ -62,5 +62,3 @@ def find(a,b):
         if not teste(N):
             L.append(N)
     print(L)
-    
-find(100,180)
