@@ -350,7 +350,9 @@ def teste3(N,L):
         if P[p]== 1:
             S[p]=L[p]
         else:
-            m = max([d for d in divisors(N) if d <= N/p**3 and (p**2).divides(int(N/d))]) # d=[G:N(I)]
+            m = max([d for d in divisors(N) if d <= N/p**3 
+                     and (p**2).divides(int(N/d))
+                     and len(list(factor(int(N/d))))!=1]) # d=[G:N(I)]
             if factorial(m)<N:
                 S[p]=L[p]
             else:
@@ -423,5 +425,5 @@ def SylowList(Nmin, Nmax):
     
     return []
 
-#find(1,1000)
+find(1,1000)
 #SylowList(24,25)
