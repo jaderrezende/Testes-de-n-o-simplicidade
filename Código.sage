@@ -12,7 +12,7 @@ def np_note(N):
     t=''
     np= np(N)
     for p in np:
-        t+=f'\[n_{p}\in\{{q for q in np[p]}\}\]'
+        t+=f'\[n_{p}\in\{{{{q for q in np[p]} \}}}\]'
     return t
 
 # Entrada N um inteiro, e L um dicionário (exemplo: a saída de np(N))
@@ -28,10 +28,11 @@ def teste1(N,L):
 
 def teste1_note(N,L):
     T='Note que:'
+    X=teste1(N,L)
     for p in L:
-        F= [q in L[p] if q not in teste1(N,L)[p]] # fora
+        F= [q for q in L[p] if q not in X[p]] # fora
         if len(F)!=0:
-            T+=f'\[n_{p}\notin\{{x for x in F}\}\]'
+            T+=f'\[n_{p}\notin\{{{ {x for x in F} \}}}\]'
     return T+'Pois teriamos \dfrac{n_p (G)!}{2}< N'
 
 
@@ -43,6 +44,16 @@ def teste2(N,L):
                 if factorial(q)/(2*N) < q/2:
                     L[p].remove(q)
     return L
+
+def teste2_note(N,L):
+        T='Agora, veja que:'
+        X=teste2(N,L)
+    for p in L:
+        F= [q for q in L[p] if q not in X[p]] # fora
+        if len(F)!=0:
+            T+=f'\[n_{p}\notin\{{{{x for x in F}}}\}\]'
+    return T+'Pois, teste 2'
+
 
 # Se p^1 é o fator p de #G. Os p Sylows tem intercessão trivial, logo, totalizam np(p-1) elemntos não triviais.
 # Se o fator é p^a, com a>1, a intecessão poderia ser não trivial. Contudo, se a não trivialidade da intercessão implica que G não é simples, assumimos que é trivial e repetimos o argumnto de contagem
@@ -77,7 +88,7 @@ def teste(N):
         
     
 def test_note(N):
-    T=f'\section{N}'#texto
+    T=f'\section{{{ {N} }}}'#texto
     if N==1:
         return 'Trivial'
     L=np(N)
@@ -85,9 +96,9 @@ def test_note(N):
     T+=teste1_note(N,L)
     L=teste1(N,L)
     T+=teste2_note(N,L)
-    L=teste2_note(N,L)
+    L=teste2(N,L)
     if any([len(L[p])==0 for p in L]):
-        return f'\\ Logo, para qualquer valor de np, com p\in\{{p in L if len(L[p])==0}\}, G podemos concluir que não é simples'
+        return f'{T}\\ Logo, para qualquer valor de np, com p\in\{{p for p in L if len(L[p])==0}\}, G podemos concluir que não é simples'
         
     if teste3_note(N,L):
         return True
@@ -120,4 +131,4 @@ def SylowList(Nmin, Nmax):
     return []
 
 #find(1,1000)
-SylowList(24,24,True)
+SylowList(24,25)
