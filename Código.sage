@@ -26,6 +26,15 @@ def teste1(N,L):
                 L[p].remove(q)
     return L
 
+def teste1_note(N,L):
+    T='Note que:'
+    for p in L:
+        F= [q in L[p] if q not in teste1(N,L)[p]] # fora
+        if len(F)!=0:
+            T+=f'\[n_{p}\notin\{{x for x in F}\}\]'
+    return T+'Pois teriamos \dfrac{n_p (G)!}{2}< N'
+
+
 # A_np é simples para np>4. Se a imagem da ação de G nos p-sylows, supondo injetividade, for um subgrupo normal de A_np, temos um absurdo. Portanto, não é injetivo. Logo, G não é normal. 
 def teste2(N,L):
     for p in L:
@@ -52,8 +61,7 @@ def teste3(N,L):
     if sum((p**P[p]-1)*min(S[p]) for p in S)+1>N:
         return True
 
-    
-    
+        
 def teste(N):
     if N==1:
         return True
@@ -92,11 +100,6 @@ def find(a,b):
         if not teste(N):
             L.append(N)
     print(L)
-    
-
-def MechanicalSylow(N):
-    return 'For now this function returns this text'
-
 
 # verbose = True means list all order
 # verbose = False means skip cases N = p^m, pq, p^2q, p^2q^2, pqr
