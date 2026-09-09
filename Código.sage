@@ -382,7 +382,7 @@ def teste(N):
         
     
 def test_note(N):
-    T=f'\\section{{{N}}}' # texto: corrigidas as chaves do LaTeX
+    T=f'\\section{{{N}}}'
     if N==1:
         return 'Trivial'
     L=np(N)
@@ -397,7 +397,7 @@ def test_note(N):
         S = str(set(vazios)).replace('{', r'\{').replace('}', r'\}')
         return f'{T}\\\\ Logo, para qualquer valor de np, com p\\in {S}, G podemos concluir que não é simples'
         
-    if teste3(N,L): # Corrigido: era teste3_note(N,L) que não existia
+    if teste3_note(N,L): # ainda não fiz
         return True
     return False
     
@@ -413,7 +413,6 @@ def SylowList(Nmin, Nmax):
     with open('output.tex', 'w') as f:
             print('\\documentclass{article}\n\\usepackage{amsmath,amssymb}\n\\usepackage{parskip}\n\\usepackage{color}\n\\usepackage[a4paper, margin=2.5cm]{geometry}\n\n\\begin{document}\n\n', file=f)
     
-    # Adicionei +1 pois no Python range(24, 24) seria vazio
     for N in range(Nmin, Nmax):
         s = test_note(N)
         with open('output.tex', 'a') as f:
@@ -425,5 +424,5 @@ def SylowList(Nmin, Nmax):
     
     return []
 
-find(1,1000)
+#find(1,1000)
 #SylowList(24,25)
