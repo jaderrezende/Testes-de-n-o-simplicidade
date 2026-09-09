@@ -32,7 +32,7 @@ def teste1(N,L):
                 L[p].remove(q)
     return L
 
-# ..................
+# A_np é simples para np>4. Se a imagem da ação de G nos p-sylows, supondo injetividade, for um subgrupo normal de A_np, temos um absurdo. Portanto, não é injetivo. Logo, G não é normal. 
 def teste2(N,L):
     for p in L:
         for q in L[p][:]:
@@ -41,7 +41,9 @@ def teste2(N,L):
                     L[p].remove(q)
     return L
 
-# ................
+# Se p^1 é o fator p de #G. Os p Sylows tem intercessão trivial, logo, totalizam np(p-1) elemntos não triviais.
+# Se o fator é p^a, com a>1, a intecessão poderia ser não trivial. Contudo, se a não trivialidade da intercessão implica que G não é simples, assumimos que é trivial e repetimos o argumnto de contagem
+#Tendo efetuado a contágem com os mínimos np's possíveis, se excedermos N, chegamos em um absurdo. Logo, G não é simples
 def teste3(N,L):
     P=dict(factor(N))
     S={}
