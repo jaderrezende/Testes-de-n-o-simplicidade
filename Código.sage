@@ -8,18 +8,12 @@ def np(N):
             q for q in divisors(N/n[0]**n[1]) if q%n[0]==1]
     return np
 
-# Entrada N 
-# Saida: similar a np()
-# só que apenas os p em que N = p^k b, k = 1
-def np_simples(N):
-    np= {}
-    for n in list(factor(N)):
-        if n[1]==1:
-            np[n[0]]=[ 
-                q for q in divisors(N/n[0]**n[1]) if q%n[0]==1]
-        else:
-            np[n[0]]=[]
-    return np
+def np_note(N):
+    t=''
+    np= np(N)
+    for p in np:
+        t+=f'\[n_{p}\in\{{q for q in np[p]}\}\]'
+    return t
 
 # Entrada N um inteiro, e L um dicionário (exemplo: a saída de np(N))
 # Se algum q em L[p] satisfaz q!/2 < N, então será removido de L[p]
@@ -73,6 +67,25 @@ def teste(N):
         return True
     return False
         
+    
+def test_note(N):
+    T=f'\section{N}'#texto
+    if N==1:
+        return 'Trivial'
+    L=np(N)
+    T+=np_note(N)
+    T+=teste1_note(N,L)
+    L=teste1(N,L)
+    T+=teste2_note(N,L)
+    L=teste2_note(N,L)
+    if any([len(L[p])==0 for p in L]):
+        return f'\\ Logo, para qualquer valor de np, com p\in\{{p in L if len(L[p])==0}\}, G podemos concluir que não é simples'
+        
+    if teste3_note(N,L):
+        return True
+    return False
+    
+    
 def find(a,b):
     L=[]
     for N in range(a,b):
@@ -81,19 +94,19 @@ def find(a,b):
     print(L)
     
 
-def MechanicalSylow(N, verbose):
+def MechanicalSylow(N):
     return 'For now this function returns this text'
 
 
 # verbose = True means list all order
 # verbose = False means skip cases N = p^m, pq, p^2q, p^2q^2, pqr
-def SylowList(Nmin, Nmax, verbose):
+def SylowList(Nmin, Nmax):
     # Option 'w' so we are overwriting any contents in 'output.tex'
     with open('output.tex', 'w') as f:
             print('\\documentclass{article}\n\\usepackage{amsmath,amssymb}\n\\usepackage{parskip}\n\\usepackage{color}\n\\usepackage[a4paper, margin=2.5cm]{geometry}\n\n\\begin{document}\n\n', file=f)
     
     for N in range(Nmin,Nmax):
-        s = MechanicalSylow(N, verbose)
+        s = test_note(N)
         with open('output.tex', 'a') as f:
             print(s, file=f)
             print('\n\n', file=f)
@@ -103,4 +116,5 @@ def SylowList(Nmin, Nmax, verbose):
     
     return []
 
-find(1,1000)
+#find(1,1000)
+SylowList(24,24,True)
