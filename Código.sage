@@ -1,6 +1,4 @@
-
-#find(1,1000)
-#SylowList(24,25)# Entrada N 
+# Entrada N 
 # Saida: um dicionário 'np'
 # para cada primo p que divide N, np(p) será os 'possíveis n_p', no sentido de n tais que n | b e n == 1 mod p, onde N = p^k b 
 def np(N):
@@ -64,7 +62,7 @@ def teo_pq_fraco(N): # Se #N=p^a*q, temos um subgrupo normal
     if len(l)==2:
         return any([p for p in l if p[1]==1])
 
-def teo_2n(N):
+def teo_2n(N): # Se #G é par mas #G/2 é impar, G não é simples
     if 2.divides(N):
         f=dict(factor(N))
         return f[2]==1
