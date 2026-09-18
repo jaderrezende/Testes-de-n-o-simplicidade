@@ -1,4 +1,6 @@
-# Entrada N 
+
+#find(1,1000)
+#SylowList(24,25)# Entrada N 
 # Saida: um dicionário 'np'
 # para cada primo p que divide N, np(p) será os 'possíveis n_p', no sentido de n tais que n | b e n == 1 mod p, onde N = p^k b 
 def np(N):
@@ -46,9 +48,6 @@ def teste3(N,L):
                 cpb= True
                 S[p]=[1]
 
-    print(S)
-    print(cpb)
-    
     if sum((p**P[p]-1)*min(S[p]) for p in S)+1>N:
         return True
     elif cpb: #contando por baixo 
