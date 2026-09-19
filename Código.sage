@@ -29,18 +29,9 @@ def teste2(N,L):
                     L[p].remove(q)
     return L
 
-def teste3(N,L): #Este teste é uma pequena extensão da demonstração do teorema 2n. Ele resolve o caso N=240
-    if 2.divides(N):
-        d=dict(factor(N))
-        n= N/2**d[2] # N=2^a * n
-        if n in L[2]: #Neste caso (n_2=n), qualquer 2-Sylow P é autonormalizante(i.e. P=N(P))
-            # Olhe para um x em P de ordem 2 e para a ação de G nos 2-Sylows. Como P=N(P) o único ponto fixo da permutação induzida por x é P. Logo, p é o produto de (n-1)/2 transposições disjuntas.
-            if not 2.divides((n-1)/2):   # Portanto, neste caso temos uma permutação impar.
-                L[2].remove(n)
-    return L # Acho que tá errado pq elimina 60!!!
 
 # Se, sob a hipótese de G ser simples, ao calcularmos uma cota para o tamanho dos Sylows e ela exceder o tamanho de G, temos um absurdo.
-def teste_cont(N,L):
+def teste3(N,L):
     cpb= False #contando por baixo. Caso tenhamos uma cota estritamente menor que o tamanho real, é suficiente que igualemos ao tamnho de G.
     P=dict(factor(N))
     S={} # É fácil contar os sylows que tem intercessão trivial
@@ -65,8 +56,6 @@ def teste_cont(N,L):
         
     return False
 
-##### Teo
-
 def teo_pq_fraco(N): # Se #N=p^a*q, temos um subgrupo normal
     l= list(factor(N)) 
     if len(l)==2:
@@ -89,11 +78,10 @@ def teste(N):
     L=np(N)
     L=teste1(N,L)
     L=teste2(N,L)
-    L=teste3(N,L)
     if any([len(L[p])==0 for p in L]):
         return True
         
-    if teste_cont(N,L):
+    if teste3(N,L):
         return True
     return False
         
@@ -156,7 +144,7 @@ def test_note(N):
         S = str(set(vazios)).replace('{', r'\{').replace('}', r'\}')
         return f'{T}\\\\ Logo, para qualquer valor de np, com $p\\in {S}$, G podemos concluir que não é simples'
         
-    if teste_cont_note(N,L): # ainda não fiz
+    if teste3_note(N,L): # ainda não fiz
         return True
     return False
     
