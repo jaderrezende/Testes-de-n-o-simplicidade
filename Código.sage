@@ -176,5 +176,5 @@ def SylowList(Nmin, Nmax):
     
     return []
 
-find(1,1000)
+#find(1,1000)
 #SylowList(24,25)
