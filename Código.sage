@@ -37,7 +37,7 @@ def teste3(N,L): #Este teste é uma pequena extensão da demonstração do teore
             # Olhe para um x em P de ordem 2 e para a ação de G nos 2-Sylows. Como P=N(P) o único ponto fixo da permutação induzida por x é P. Logo, p é o produto de (n-1)/2 transposições disjuntas.
             if not 2.divides((n-1)/2):   # Portanto, neste caso temos uma permutação impar.
                 L[2].remove(n)
-    return L
+    return L # Acho que tá errado pq elimina 60!!!
 
 # Se, sob a hipótese de G ser simples, ao calcularmos uma cota para o tamanho dos Sylows e ela exceder o tamanho de G, temos um absurdo.
 def teste_cont(N,L):
@@ -65,6 +65,8 @@ def teste_cont(N,L):
         
     return False
 
+##### Teo
+
 def teo_pq_fraco(N): # Se #N=p^a*q, temos um subgrupo normal
     l= list(factor(N)) 
     if len(l)==2:
@@ -87,6 +89,7 @@ def teste(N):
     L=np(N)
     L=teste1(N,L)
     L=teste2(N,L)
+    L=teste3(N,L)
     if any([len(L[p])==0 for p in L]):
         return True
         
@@ -173,5 +176,5 @@ def SylowList(Nmin, Nmax):
     
     return []
 
-#find(1,1000)
+find(1,1000)
 #SylowList(24,25)
