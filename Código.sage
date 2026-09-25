@@ -29,11 +29,12 @@ def teste2(N,L):
                     L[p].remove(q)
     return L
 
-def teste3(N,L): # Exemplo de caso eliminado 336
+def teste3(N,L): # Exemplo de caso eliminado 336... fiz errado
     for p in L:
         if p+1 in L[p]:
+            N_S= Integer(N/p+1)
             # Sabemos que np(A_p+1)=#p-ciclos/#quantidade de p-ciclos por Sylow = (p+1)*(p-1)!/ p-1. Assim, seja S um Sylow, #N(S)=#A_p+1 / np = p*(p-1)/2
-            if not (N/p+1).divides((p*(p-1))/2): # Se G é simples, caso np=p+1, G é isomorfo a um subgrupo de A_p+1. Assim, N_G(S)< N_Ap+1(S)  
+            if not N_S.divides(int((p*(p-1))/2)): # Se G é simples, caso np=p+1, G é isomorfo a um subgrupo de A_p+1. Assim, N_G(S)< N_Ap+1(S)  
                 L[p].remove(p+1)
     return L
 
@@ -86,6 +87,7 @@ def teste(N):
     L=np(N)
     L=teste1(N,L)
     L=teste2(N,L)
+    L=teste3(N,L)
     if any([len(L[p])==0 for p in L]):
         return True
         
