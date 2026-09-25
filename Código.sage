@@ -29,7 +29,8 @@ def teste2(N,L):
                     L[p].remove(q)
     return L
 
-def teste3(N,L): # Exemplo de caso eliminado 336... fiz errado
+### Tá errado
+def teste3(N,L): # Exemplo de caso eliminado 336
     for p in L:
         if p+1 in L[p]:
             N_S= Integer(N/p+1)
