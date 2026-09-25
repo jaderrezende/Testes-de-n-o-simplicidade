@@ -29,9 +29,17 @@ def teste2(N,L):
                     L[p].remove(q)
     return L
 
+def teste3(N,L): # Exemplo de caso eliminado 336
+    for p in L:
+        if p+1 in L[p]:
+            # Sabemos que np(A_p+1)=#p-ciclos/#quantidade de p-ciclos por Sylow = (p+1)*(p-1)!/ p-1. Assim, seja S um Sylow, #N(S)=#A_p+1 / np = p*(p-1)/2
+            if not (N/p+1).divides((p*(p-1))/2): # Se G é simples, caso np=p+1, G é isomorfo a um subgrupo de A_p+1. Assim, N_G(S)< N_Ap+1(S)  
+                L[p].remove(p+1)
+    return L
+
 
 # Se, sob a hipótese de G ser simples, ao calcularmos uma cota para o tamanho dos Sylows e ela exceder o tamanho de G, temos um absurdo.
-def teste3(N,L):
+def teste_cont(N,L):
     cpb= False #contando por baixo. Caso tenhamos uma cota estritamente menor que o tamanho real, é suficiente que igualemos ao tamnho de G.
     P=dict(factor(N))
     S={} # É fácil contar os sylows que tem intercessão trivial
@@ -81,7 +89,7 @@ def teste(N):
     if any([len(L[p])==0 for p in L]):
         return True
         
-    if teste3(N,L):
+    if teste_cont(N,L):
         return True
     return False
         
