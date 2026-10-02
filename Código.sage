@@ -1,6 +1,4 @@
-
-#find(1,1000)
-#SylowList(24,25)# Entrada N 
+# Entrada N 
 # Saida: um dicionário 'np'
 # para cada primo p que divide N, np(p) será os 'possíveis n_p', no sentido de n tais que n | b e n == 1 mod p, onde N = p^k b 
 def np(N):
@@ -29,11 +27,10 @@ def teste2(N,L):
                     L[p].remove(q)
     return L
 
-### Tá errado
 def teste3(N,L): # Exemplo de caso eliminado 336
     for p in L:
         if p+1 in L[p]:
-            N_S= Integer(N/p+1)
+            N_S= Integer(N/(p+1))
             # Sabemos que np(A_p+1)=#p-ciclos/#quantidade de p-ciclos por Sylow = (p+1)*(p-1)!/ p-1. Assim, seja S um Sylow, #N(S)=#A_p+1 / np = p*(p-1)/2
             if not N_S.divides(int((p*(p-1))/2)): # Se G é simples, caso np=p+1, G é isomorfo a um subgrupo de A_p+1. Assim, N_G(S)< N_Ap+1(S)  
                 L[p].remove(p+1)
@@ -51,7 +48,8 @@ def teste_cont(N,L):
         else: # Dado I a maior intercessão de p-Sylows, denotamos d=[G:N(I)]
             m = max([d for d in divisors(N) if d <= N/p**3 
                      and (p**2).divides(int(N/d))
-                     and len(list(factor(int(N/d))))!=1]) 
+                     and len(list(factor(int(N/d))))!=1]
+                     and np(N/d)[p]>1) 
             if factorial(m)<N:
                 S[p]=L[p]
             else:
