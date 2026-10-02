@@ -41,15 +41,15 @@ def teste3(N,L): # Exemplo de caso eliminado 336
 def teste_cont(N,L):
     cpb= False #contando por baixo. Caso tenhamos uma cota estritamente menor que o tamanho real, é suficiente que igualemos ao tamnho de G.
     P=dict(factor(N))
-    S={} # É fácil contar os sylows que tem intercessão trivial
+    S={} # É fácil contar os sylows que tem interseção trivial
     for p in L:
         if P[p]== 1:
-            S[p]=L[p] #Se os Sylows são p-grupos, eles tem intercessão trivial
+            S[p]=L[p] #Se os Sylows são p-grupos, eles tem interseção trivial
         else: # Dado I a maior intercessão de p-Sylows, denotamos d=[G:N(I)]
             m = max([d for d in divisors(N) if d <= N/p**3 
                      and (p**2).divides(int(N/d))
-                     and len(list(factor(int(N/d))))!=1]
-                     and np(N/d)[p]>1) 
+                     and len(list(factor(int(N/d))))!=1
+                     and np(N/d)[p]!=[1]]) 
             if factorial(m)<N:
                 S[p]=L[p]
             else:
