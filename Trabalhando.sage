@@ -56,7 +56,8 @@ def teste_cont(N,L):
                 cpb= True
                 S[p]=[1]
 
-    print(S)
+    print(f"posso contar {S}")
+    print(f"somam {sum((p**P[p]-1)*min(S[p]) for p in S)+1}")
     if sum((p**P[p]-1)*min(S[p]) for p in S)+1>N:
         return True
     elif cpb: #contando por baixo 
@@ -76,49 +77,28 @@ def teo_2n(N): # Se #G é par mas #G/2 é impar, G não é simples
         return f[2]==1
     
 ######
-        
-def teste(N):
-    if N==1:
-        return True
-    if teo_pq_fraco(N):
-        return True
-    if teo_2n(N):
-        return True
-    L=np(N)
-    L=teste1(N,L)
-    L=teste2(N,L)
-    L=teste3(N,L)
-    if any([len(L[p])==0 for p in L]):
-        return True
-        
-    if teste_cont(N,L):
-        return True
-    return False
-        
+
 ############## Calculando ##########
-def teste(N):
+def teste_print(N):
+    print(f'{N}={factor(N)}')
     if N==1:
-        return True
+        prin(":|")
+        return
     if teo_pq_fraco(N):
         print("p^a b")
-        break
+        return
     if teo_2n(N):
         print("2n")
-        break
+        return
     L=np(N)
     L=teste1(N,L)
     L=teste2(N,L)
     L=teste3(N,L)
-    print(L)
-     if any([len(L[p])==0 for p in L]):
-        break
+    print(f"np={L}")
+    #print(f'N')
+    if any([len(L[p])==0 for p in L]):
+        return
     teste_cont(N,L)
     
     
-def find(a,b):
-    L=[]
-    for N in range(a,b):
-        if not teste(N):
-            L.append(N)
-    print(L)
-    
+teste_print(288)
